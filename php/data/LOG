@@ -1,0 +1,5 @@
+=============== Jan 1, 1970 (JST) ===============
+09:00:14.000129 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:00:14.000015 db@open opening
+09:00:14.000021 journal@recovery F·2
+09:00:14.000030 journal@recovery recovering @1
