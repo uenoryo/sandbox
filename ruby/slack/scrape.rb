@@ -1,34 +1,36 @@
 require 'nokogiri'
 require 'mechanize'
 
-USERNAME         = "admin"
-PASSWORD         = "jife893(3kP"
-LOGIN_URL        = "https://up.myreco.me/admin/login"
-NATURAL_POST_URL = "https://up.myreco.me/post/natural/"
-ALL_POST_URL     = "https://up.myreco.me/admin/post/post/"
+# 写真投稿数取得用
+POST_USERNAME  = "admin"
+POST_PASSWORD  = "jife893(3kP"
+POST_LOGIN_URL = "https://up.myreco.me/admin/login"
+POST_URL       = "https://up.myreco.me/post/natural"
+POST_ALL_URL   = "https://up.myreco.me/admin/post/post/"
+
+# ランキング用
+RANKING_USERNAME  = "kusumi@bond-y.com"
+RANKING_PASSWORD  = "myreco0825"
+RANKING_LOGIN_URL = "https://searchman.com/signin"
+RANKING_URL       = "https://searchman.com/portfolio"
 
 agent = Mechanize.new
 agent.user_agent_alias = "Mac Safari 4"
 
-# Login
-agent.get(LOGIN_URL) do |page|
-  form = page.forms[0]
-  form.field_with(name: 'username').value = USERNAME
-  form.field_with(name: 'password').value = PASSWORD
-  agent.submit(form)
-end
+# POST 投稿数
+# agent.get(POST_LOGIN_URL) do |page|
+#   form = page.forms[0]
+#   form.field_with(name: 'username').value = POST_USERNAME
+#   form.field_with(name: 'password').value = POST_PASSWORD
+#   agent.submit(form)
+# end
 
-# agent.get(NATURAL_POST_URL) do |page|
+# agent.get(POST_URL) do |page|
 #     html = Nokogiri::HTML(page.body)
 #     trs = html.xpath('//tr')
 #     tds = trs[2].children
 #     p tds[1].text
 # end
-
-agent.get(ALL_POST_URL) do |page|
-  html = Nokogiri::HTML(page.body)
-  p html.css('.paginator').children.last.inner_text.split(' ')[0]
-end
 
 # Note:
 # 以下の26日の 「15」 が欲しい
@@ -48,6 +50,14 @@ end
 #     <tr><td>2か月前</td><td>370</td></tr>
 # </tbody>
 
+# ******
+
+# POST 自然投稿数
+# agent.get(POST_ALL_URL) do |page|
+#   html = Nokogiri::HTML(page.body)
+#   p html.css('.paginator').children.last.inner_text.split(' ')[0]
+# end
+
 # Note:
 # 249573 が欲しい
 # <p class="paginator">
@@ -60,3 +70,24 @@ end
 #     <a href="?p=2495" class="end">2496</a>
 #     249573 投稿
 # </p>
+
+# ******
+
+agent.get(RANKING_LOGIN_URL) do |page|
+  form = page.forms[0]
+  form.field_with(name: 'email').value = RANKING_USERNAME
+  form.field_with(name: 'password').value = RANKING_PASSWORD
+  agent.submit(form)
+end
+
+# RANKING ランキング
+# agent.get(RANKING_URL) do |page|
+#   html = Nokogiri::HTML(page.body)
+#   p html.css('.myapps-tr-country.android').children[3].inner_text
+# end
+agent.get(RANKING_URL) do |page|
+  html = Nokogiri::HTML(page.body)
+  # p html.css('.myapps-tr-country.android .rankings > .rankings-value')[0].inner_text
+  # p html.css('tr#android-me').inner_text
+  p html.css('.myapps-tr-country.android')[1].children[5].inner_text
+end

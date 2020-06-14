@@ -1,0 +1,6 @@
+{
+    "require": {
+        "zircote/swagger-php": "^3.0",
+        "symfony/yaml": "^4.3"
+    }
+}

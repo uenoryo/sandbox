@@ -1,0 +1,9 @@
+---
+BasedOnStyle: Google
+IndentWidth: 4
+---
+Language: Proto
+AlignConsecutiveAssignments: true
+ColumnLimit: 400
+SpacesBeforeTrailingComments: 1
+...

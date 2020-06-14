@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sandbox
+  annotations:
+    kubbernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: dev.localhost.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sandbox
+          servicePort: 9080

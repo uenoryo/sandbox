@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    childprocess (1.0.1)
+      rake (< 13.0)
     connection_pool (2.2.2)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
@@ -25,6 +27,11 @@ GEM
     nokogiri (1.9.1)
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
+    rake (12.3.2)
+    rubyzip (1.2.2)
+    selenium-webdriver (3.142.2)
+      childprocess (>= 0.5, < 2.0)
+      rubyzip (~> 1.2, >= 1.2.2)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
@@ -36,6 +43,7 @@ PLATFORMS
 DEPENDENCIES
   mechanize
   nokogiri
+  selenium-webdriver
 
 BUNDLED WITH
    1.17.3

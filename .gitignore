@@ -1,2 +1,5 @@
 /unity
 /ruby/**/vendor
+/php/myreco
+/php/aws
+/php/laravel
